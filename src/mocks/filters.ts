@@ -10,8 +10,13 @@ const categories: IDropdownItem[] = [
 
 const sources: IDropdownItem[] = [
   {title: 'The New York Times', value: 'The New York Times'},
-  {title: 'CBS News', value: 'cbs-news'},
+  {title: 'BBC', value: 'https://www.bbc.co.uk'},
   {title: 'The Atlantic', value: 'theatlantic.com-1'},
 ];
 
-export {categories, sources};
+const date: IDropdownItem[] = [
+  {title: 'Newest first', value: 'relevance'},
+  {title: 'Oldest first', value: 'newest'},
+];
+
+export {categories, sources, date};

@@ -1,16 +1,16 @@
 import {ITheNewsArticle} from '../store/models/ITheNewsArticle';
 import {INYArticle} from '../store/models/INYArticle';
-import {INewsApiArticle} from '../store/models/INewsApiArticle';
+import {IWorldNewsArticle} from '../store/models/IWorldNewsArticle';
 import {IArticle} from '../store/models/IArticle';
 import {nyTimes} from '../constants';
 
 const mergeArticles = ({
   nyTimesData,
-  newsApiData,
+  worldNewsData,
   theNewsData,
 }: {
   nyTimesData: INYArticle[];
-  newsApiData: INewsApiArticle[];
+  worldNewsData: IWorldNewsArticle[];
   theNewsData: ITheNewsArticle[];
 }) => {
   const mergedNews: IArticle[] = [];
@@ -26,29 +26,29 @@ const mergeArticles = ({
     });
   });
 
-  newsApiData?.forEach((obj: INewsApiArticle) => {
+  worldNewsData?.forEach((obj: IWorldNewsArticle) => {
     mergedNews.push({
       title: obj.title,
-      image: obj.urlToImage,
-      description: obj.description,
-      source: obj.source.name,
+      image: obj.image,
+      description: obj.text,
+      source: '',
       author: obj.author,
       link: obj.url ? obj.url : '',
-      publishedAt: obj.publishedAt,
+      publishedAt: obj.publish_date,
     });
   });
 
-  // theNewsData?.forEach((obj: ITheNewsArticle) => {
-  //   mergedNews.push({
-  //     title: obj.title,
-  //     image: obj.image_url,
-  //     description: obj.snippet,
-  //     source: obj.source,
-  //     author: obj.source,
-  //     link: obj.url,
-  //     publishedAt: obj.published_at,
-  //   });
-  // });
+  theNewsData?.forEach((obj: ITheNewsArticle) => {
+    mergedNews.push({
+      title: obj.title,
+      image: obj.image_url,
+      description: obj.snippet,
+      source: obj.source,
+      author: obj.source,
+      link: obj.url,
+      publishedAt: obj.published_at,
+    });
+  });
 
   return mergedNews;
 };

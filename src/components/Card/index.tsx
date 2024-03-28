@@ -1,5 +1,5 @@
 import {FC} from 'react';
-import {IArticle} from '@/store/models/IArticle';
+import {IArticle} from '../../store/models/IArticle';
 import LazyImage from '../../ui-kit/LazyImage';
 import formatDateString from '../../utils/formatDateString';
 
@@ -11,7 +11,6 @@ const Card: FC<IArticle> = ({
   image,
   publishedAt,
 }) => {
-  console.log(publishedAt);
   return (
     <a href={link} target="_blank" className="w-full grid gap-sm">
       <div className="w-full h-[210px] bg-no-photo bg-cover bg-center rounded-xs overflow-hidden relative">
@@ -29,7 +28,7 @@ const Card: FC<IArticle> = ({
         </div>
         {author && (
           <div className="flex items-center gap-xs">
-            <div className="overflow-hidden w-[34px] min-w-[34px] h-[34px] rounded-full bg-primary-main border-2">
+            <div className="overflow-hidden w-[34px] min-w-[34px] h-[34px] rounded-full bg-primary-light border-2">
               <LazyImage src="/images/author.png" alt="author" />
             </div>
 

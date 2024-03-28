@@ -4,14 +4,14 @@ const nyTimes = {
   originUrl: 'https://www.nytimes.com/',
 };
 
-const newsApi = {
-  url: 'https://newsapi.org/v2/top-headlines',
-  key: '8a2070cd9b824bd8a2631d1bcaa55dc7',
+const worldNews = {
+  url: 'https://api.worldnewsapi.com',
+  key: '1ef3bb344ee44da2a3f4bfdc20d46f21',
 };
 
 const theNews = {
   url: 'https://api.thenewsapi.com/v1/news/top',
-  key: 'rKb0vyiTzEFtzsv2vRwI8xKXtmi3jR2eHAPiaxly',
+  key: 'JTUKWWu4alXeJQBzqEtjoDSF9sBqNcVKLwlLFCZj',
 };
 
-export {nyTimes, newsApi, theNews};
+export {nyTimes, worldNews, theNews};

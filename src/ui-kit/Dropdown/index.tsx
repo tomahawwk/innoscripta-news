@@ -9,7 +9,7 @@ const Dropdown: FC<IDropdown> = ({list, label, onChange, value}) => {
   };
 
   return (
-    <div className="w-[190px] custom-dropdown">
+    <div className="w-full md:w-[190px] custom-dropdown">
       <Select
         variant="outlined"
         label={label}

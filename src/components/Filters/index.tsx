@@ -1,122 +1,87 @@
 import {useEffect, useState} from 'react';
-import debounce from '../../utils/debounce';
-import {useAppDispatch, useAppSelector} from '../../store/hooks/redux';
 import {fetchNews} from '../../store/reducers/ActionCreators';
 import Dropdown from '../../ui-kit/Dropdown';
-import {categories, sources} from '../../mocks/filters';
-import {IDropdownItem} from '../../ui-kit/Dropdown/types';
+import {categories, date, sources} from '../../mocks/filters';
 import Button from '../../ui-kit/Button';
-import {
-  getFiltersSelector,
-  setCategoryObject,
-  setFiltersParams,
-  setSearchTerm,
-  setSourceObject,
-} from '../../store/reducers/FiltersSlice';
 import Field from '../Search';
+import FiltersModal from './modal';
+import {useFilters} from 'hooks/useFilters';
+import {useAppDispatch} from 'store/hooks/redux';
 
 const Filters = () => {
-  const [filterDebounceTimer] = useState<number>(700);
   const [saved, setSaved] = useState<boolean>(false);
-  const {categoryObject, sourceObject, searchTerm} =
-    useAppSelector(getFiltersSelector);
-  const [category, setCategory] = useState<IDropdownItem | Record<string, any>>(
-    categoryObject,
-  );
-  const [source, setSource] = useState<IDropdownItem | Record<string, any>>(
-    sourceObject,
-  );
-  const [search, setSearch] = useState<string>(searchTerm);
-  const [params, setParams] = useState({});
-
+  const [openTouchFilters, setOpenTouchFilters] = useState<boolean>(false);
+  const {
+    params,
+    source,
+    category,
+    dateSort,
+    searchTerm,
+    handleSearch,
+    handleCategoriesChange,
+    handleSourcesChange,
+    handleDateSortChange,
+    handleSaveFilters,
+    handleClearFilters,
+  } = useFilters();
   const dispatch = useAppDispatch();
 
-  const handleSearch = (inputValue: string) => {
-    handleSearchDebounce(inputValue);
-  };
-
-  const handleSearchDebounce = debounce((inputValue: string) => {
-    setParams({
-      ...params,
-      search: inputValue,
-    });
-    setSearch(inputValue);
-  }, filterDebounceTimer);
-
-  const handleCategoriesChange = debounce((category: IDropdownItem) => {
-    setParams({
-      ...params,
-      category: category.value,
-    });
-    setCategory(category);
-  }, filterDebounceTimer);
-
-  const handleSourcesChange = debounce((source: IDropdownItem) => {
-    setParams({
-      ...params,
-      source: source.value,
-    });
-    setSource(source);
-  }, filterDebounceTimer);
-
-  const handleSaveFilters = () => {
+  const handleSave = () => {
+    handleSaveFilters();
     setSaved(true);
-    dispatch(setFiltersParams(params));
-    search && dispatch(setSearchTerm(search));
-    category && dispatch(setCategoryObject(category));
-    source && dispatch(setSourceObject(source));
   };
 
-  const handleClearFilters = () => {
-    dispatch(setFiltersParams({}));
-    setParams({});
-
-    dispatch(setSearchTerm(''));
-
-    dispatch(setCategoryObject({}));
-    setCategory({});
-
-    dispatch(setSourceObject({}));
-    setSource({});
-
-    dispatch(fetchNews({}));
-
+  const handleClear = () => {
+    handleClearFilters();
     setSaved(false);
   };
 
   useEffect(() => {
-    console.log('paramn', !!Object.keys(params).length);
     if (!!Object.keys(params).length) dispatch(fetchNews(params));
   }, [params]);
 
   return (
     <div className="w-full grid gap-md">
-      <div className="flex w-full gap-md">
+      <div className="flex w-full gap-md items-center">
         <Field
           onChange={e => {
             handleSearch(e.target.value);
           }}
           value={searchTerm}
         />
-        <Dropdown
-          label="Select category"
-          list={categories}
-          value={category}
-          onChange={handleCategoriesChange}
-        />
-        <Dropdown
-          label="Select source"
-          list={sources}
-          value={source}
-          onChange={handleSourcesChange}
-        />
+        <div className="gap-md lg:flex hidden">
+          <Dropdown
+            label="Select category"
+            list={categories}
+            value={category}
+            onChange={handleCategoriesChange}
+          />
+          <Dropdown
+            label="Select source"
+            list={sources}
+            value={source}
+            onChange={handleSourcesChange}
+          />
+          <Dropdown
+            label="Sort by date"
+            list={date}
+            value={dateSort}
+            onChange={handleDateSortChange}
+          />
+        </div>
+        <button
+          onClick={() => setOpenTouchFilters(true)}
+          className="lg:hidden flex bg-primary-main w-[40px] min-w-[40px] h-[40px] rounded-sm p-[8px]">
+          <img className="rotate-90" src="/images/settings.svg" alt="filters" />
+        </button>
       </div>
-      <div className="flex gap-sm items-center">
-        <Button onClick={handleSaveFilters} primary>
+      <div className="gap-sm items-center lg:flex hidden">
+        <Button onClick={handleSave} primary>
           {saved ? 'Filters saved' : 'Save filters'}
         </Button>
-        <Button onClick={handleClearFilters}>Clear filters</Button>
+        <Button onClick={handleClear}>Clear filters</Button>
       </div>
+      <FiltersModal open={openTouchFilters} setOpen={setOpenTouchFilters} />
     </div>
   );
 };

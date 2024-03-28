@@ -1,18 +1,20 @@
 import {PayloadAction, createSlice} from '@reduxjs/toolkit';
 import {RootState} from '../store';
-import {IDropdownItem} from '@/ui-kit/Dropdown/types';
+import {IDropdownItem} from '../../ui-kit/Dropdown/types';
 
 interface FiltersState {
   params: Record<string, any>;
   searchTerm: string;
   categoryObject: IDropdownItem | Record<string, any>;
   sourceObject: IDropdownItem | Record<string, any>;
+  dateSortObject: IDropdownItem | Record<string, any>;
 }
 
 const initialState: FiltersState = {
   params: {},
   categoryObject: {},
   sourceObject: {},
+  dateSortObject: {},
   searchTerm: '',
 };
 
@@ -38,6 +40,12 @@ export const filtersSlice = createSlice({
     ) {
       state.sourceObject = action.payload;
     },
+    setDateSortObject(
+      state,
+      action: PayloadAction<IDropdownItem | Record<string, any>>,
+    ) {
+      state.dateSortObject = action.payload;
+    },
   },
 });
 
@@ -46,6 +54,7 @@ export const {
   setCategoryObject,
   setSourceObject,
   setSearchTerm,
+  setDateSortObject,
 } = filtersSlice.actions;
 
 export const getFiltersSelector = (state: RootState) => state.filtersReducer;

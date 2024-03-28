@@ -1,4 +1,4 @@
-import {newsApi, nyTimes, theNews} from '../constants';
+import {worldNews, nyTimes, theNews} from '../constants';
 
 const createNYParamsString = (params: Record<string, any>) => {
   let result: string = '';
@@ -14,20 +14,24 @@ const createNYParamsString = (params: Record<string, any>) => {
   if (params.source)
     result += `${params.category ? ' AND ' : ''}source:("${params.source}")`;
 
+  if (params.dateSort) result += `&sort=${params.dateSort}`;
+
   return result;
 };
 
-const createNewsApiParamsString = (params: Record<string, any>) => {
+const createWorldNewsParamsString = (params: Record<string, any>) => {
   let result: string = '';
 
-  result += `?pageSize=10&apiKey=${newsApi.key}&language=en`;
+  result += `/search-news?api-key=${worldNews.key}&language=en`;
 
-  result += `&q=${params.search ? params.search : ' '}`;
+  if (params.search) result += `&text=${params.search}`;
 
-  if (params.category && !params.source)
-    result += `&category=${params.category}`;
+  if (params.category) result += `&authors=${params.category}`;
 
-  if (params.source) result += `&sources=${params.source}`;
+  if (params.source) result += `&news-sources=${params.source}`;
+
+  // if (params.dateSort)
+  //   result += `&sort=publish-time&sort-direction=${params.dateSort}`;    // response from api with this parameter is too long :(
 
   return result;
 };
@@ -48,6 +52,6 @@ const createTheNewsParamsString = (params: Record<string, any>) => {
 
 export {
   createNYParamsString,
-  createNewsApiParamsString,
+  createWorldNewsParamsString,
   createTheNewsParamsString,
 };

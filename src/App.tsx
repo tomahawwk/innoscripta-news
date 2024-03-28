@@ -31,11 +31,13 @@ function App() {
   // }, [articles]);
 
   return (
-    <div className="App">
+    <div className="App overflow-x-hidden">
       <BaseLayout>
-        <div className="grid items-start gap-lg">
-          <h1 className="text-h1 animation-fade-y">Innoscripta News</h1>
-          <div className="grid items-start gap-xl">
+        <div className="grid items-start gap-md md:gap-lg">
+          <h1 className="text-[32px] md:text-h1 animation-fade-y">
+            Innoscripta News
+          </h1>
+          <div className="grid items-start gap-lg md:gap-xl">
             <Filters />
             {isLoading ? (
               <List>{skeletonArticles}</List>

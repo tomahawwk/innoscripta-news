@@ -4,7 +4,7 @@ import AnimatedWord from '../AnimatedWord';
 
 const Link: FC<ILink> = ({title, url}) => {
   return (
-    <a href={url} target="_blank" className="text-[16px]">
+    <a href={url} target="_blank" className="text-[14px] md:text-[16px]">
       <AnimatedWord text={title} />
     </a>
   );
