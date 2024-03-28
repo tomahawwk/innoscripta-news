@@ -16,7 +16,6 @@ export const fetchNews = createAsyncThunk(
     console.log('fetch');
     const [nyTimesResponse, theNewsResponse] = await Promise.all([
       axios.get(nyTimes.url + createNYParamsString(params)),
-      axios.get(newsApi.url + createNewsApiParamsString(params)),
       axios.get(theNews.url + createTheNewsParamsString(params)),
     ]);
     const nyTimesData: INYArticle[] = await nyTimesResponse.data.response.docs;
