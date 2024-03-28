@@ -11,7 +11,7 @@ const gNews = {
 
 const theNews = {
   url: 'https://api.thenewsapi.com/v1/news/top',
-  key: 'qJkacPiAibtJaMagWHfTMpFupsPFi61trVFCaFCr',
+  key: 'uDVjC77xuWgBCFX4ckBRjWhc1ByGBV6Rm3zLNWfx',
 };
 
 export {nyTimes, gNews, theNews};
