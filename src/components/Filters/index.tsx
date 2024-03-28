@@ -42,7 +42,7 @@ const Filters = () => {
   }, [params]);
 
   return (
-    <div className="w-full grid gap-md">
+    <div className="w-full grid gap-md z-20">
       <div className="flex w-full gap-md items-center">
         <div className="animation-fade-y animation-delay-3 w-full">
           <Field
