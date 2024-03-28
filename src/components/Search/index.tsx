@@ -17,7 +17,7 @@ const Search: FC<ISearch> = ({value, onChange}) => {
         label="Search news"
         color="brown"
         onChange={onChange}
-        crossOrigin={false}
+        crossOrigin={undefined}
       />
     </div>
   );
