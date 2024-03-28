@@ -12,7 +12,9 @@ const Header = () => {
         />
         <Navigation />
       </div>
-      <Link url="/cv-egor.pdf" title="Look_at_my_CV" />
+      <div className="animation-fade-y animation-delay-1 md:animation-delay-3">
+        <Link url="/cv-egor.pdf" title="Look_at_my_CV" />
+      </div>
     </div>
   );
 };

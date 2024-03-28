@@ -23,13 +23,13 @@ const FiltersModal: FC<IFiltersModal> = ({open, setOpen}) => {
   const dispatch = useAppDispatch();
 
   const handleSetFilters = () => {
-    if (!!Object.keys(params).length) dispatch(fetchNews(params));
+    !!Object.keys(params).length && dispatch(fetchNews(params));
     handleSaveFilters();
     setOpen(false);
   };
 
   const handleCloseFilters = () => {
-    handleClearFilters();
+    !!!Object.keys(params).length && handleClearFilters();
     setOpen(false);
   };
 
@@ -39,8 +39,14 @@ const FiltersModal: FC<IFiltersModal> = ({open, setOpen}) => {
       handler={setOpen}
       placeholder="filters"
       className="bg-primary-lighter rounded-sm">
-      <div className="grid p-sm gap-sm">
+      <div className="grid p-sm gap-md">
+        <button
+          className="w-[20px] h-[20px] absolute top-sm right-sm"
+          onClick={handleCloseFilters}>
+          <img src="/images/close.svg" alt="close filters" />
+        </button>
         <div className="font-medium text-[24px] text-black">Search filters</div>
+
         <div className="grid gap-sm">
           <Dropdown
             label="Select category"

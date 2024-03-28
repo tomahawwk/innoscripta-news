@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import {useEffect} from 'react';
 import {useAppDispatch, useAppSelector} from './store/hooks/redux';
 import BaseLayout from './layouts/BaseLayout';
 import Filters from './components/Filters';
@@ -7,7 +7,6 @@ import Card from './components/Card';
 import {fetchNews} from './store/reducers/ActionCreators';
 import Skeleton from './components/Card/Skeleton';
 import {getFiltersSelector} from './store/reducers/FiltersSlice';
-import {IArticle} from './store/models/IArticle';
 import mergeArticles from './utils/mergeArticles';
 
 const skeletonArticles: any = [];
@@ -29,13 +28,15 @@ function App() {
     <div className="App overflow-x-hidden">
       <BaseLayout>
         <div className="grid items-start gap-md md:gap-lg">
-          <h1 className="text-[32px] md:text-h1 animation-fade-y">
+          <h1 className="text-[32px] md:text-h1 animation-fade-y animation-delay-2">
             Innoscripta News
           </h1>
           <div className="grid items-start gap-lg md:gap-xl">
             <Filters />
             {isLoading ? (
-              <List>{skeletonArticles}</List>
+              <div className="animation-fade-y animation-delay-6">
+                <List>{skeletonArticles}</List>
+              </div>
             ) : mergeArticles(articles).length ? (
               <List>
                 {mergeArticles(articles).map(article => (

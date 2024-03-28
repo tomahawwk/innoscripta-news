@@ -1,17 +1,17 @@
 const nyTimes = {
   url: 'https://api.nytimes.com/svc/search/v2/articlesearch.json',
-  key: 'vGiDBDmWH8G8BWfm7IkucsAYupl5YAz5',
+  key: 'H3uEx1ycSiXkDLoOhRKrUJRIWTJKnGEI',
   originUrl: 'https://www.nytimes.com/',
 };
 
-const worldNews = {
-  url: 'https://api.worldnewsapi.com',
-  key: '1ef3bb344ee44da2a3f4bfdc20d46f21',
+const gNews = {
+  url: 'https://gnews.io/api/v4/search',
+  key: 'a046435684d5eb8ed2f22d8d2de0e4be',
 };
 
 const theNews = {
   url: 'https://api.thenewsapi.com/v1/news/top',
-  key: 'JTUKWWu4alXeJQBzqEtjoDSF9sBqNcVKLwlLFCZj',
+  key: 'qJkacPiAibtJaMagWHfTMpFupsPFi61trVFCaFCr',
 };
 
-export {nyTimes, worldNews, theNews};
+export {nyTimes, gNews, theNews};

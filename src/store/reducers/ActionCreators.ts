@@ -1,29 +1,31 @@
 import axios from 'axios';
 import {createAsyncThunk} from '@reduxjs/toolkit';
-import {nyTimes, worldNews, theNews} from '../../constants';
+import {nyTimes, gNews, theNews} from '../../constants';
 import {
   createNYParamsString,
-  createWorldNewsParamsString,
+  createGNewsParamsString,
   createTheNewsParamsString,
 } from '../../utils/createParamsString';
 import {INYArticle} from '../models/INYArticle';
-import {IWorldNewsArticle} from '../models/IWorldNewsArticle';
+import {IGNewsArticle} from '../models/IGNewsArticle';
 import {ITheNewsArticle} from '../models/ITheNewsArticle';
 
 export const fetchNews = createAsyncThunk(
   'news/fetchAll',
   async (params: Record<string, any>) => {
-    const [nyTimesResponse, worldNewsResponse, theNewsResponse] =
-      await Promise.all([
+    const [nyTimesResponse, gNewsResponse, theNewsResponse] = await Promise.all(
+      [
         axios.get(nyTimes.url + createNYParamsString(params)),
-        axios.get(worldNews.url + createWorldNewsParamsString(params)),
+        axios.get(gNews.url + createGNewsParamsString(params)),
         axios.get(theNews.url + createTheNewsParamsString(params)),
-      ]);
+      ],
+    );
     const nyTimesData: INYArticle[] = await nyTimesResponse.data.response.docs;
-    const worldNewsData: IWorldNewsArticle[] =
-      await worldNewsResponse.data.news;
+
+    const gNewsData: IGNewsArticle[] = await gNewsResponse.data.articles;
+
     const theNewsData: ITheNewsArticle[] = await theNewsResponse.data.data;
 
-    return {nyTimesData, worldNewsData, theNewsData};
+    return {nyTimesData, gNewsData, theNewsData};
   },
 );

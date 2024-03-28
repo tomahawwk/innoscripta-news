@@ -1,4 +1,4 @@
-import {worldNews, nyTimes, theNews} from '../constants';
+import {gNews, nyTimes, theNews} from '../constants';
 
 const createNYParamsString = (params: Record<string, any>) => {
   let result: string = '';
@@ -19,16 +19,16 @@ const createNYParamsString = (params: Record<string, any>) => {
   return result;
 };
 
-const createWorldNewsParamsString = (params: Record<string, any>) => {
+const createGNewsParamsString = (params: Record<string, any>) => {
   let result: string = '';
 
-  result += `/search-news?api-key=${worldNews.key}&language=en`;
+  result += `?apikey=${gNews.key}&lang=en`;
 
-  if (params.search) result += `&text=${params.search}`;
+  result += `&q=${params.search ? params.search : 'a'}`;
 
-  if (params.category) result += `&authors=${params.category}`;
+  if (params.category) result += `&category=${params.category}`;
 
-  if (params.source) result += `&news-sources=${params.source}`;
+  if (params.source) result += `&from=2027-03-28T13:44:50Z`;
 
   return result;
 };
@@ -49,6 +49,6 @@ const createTheNewsParamsString = (params: Record<string, any>) => {
 
 export {
   createNYParamsString,
-  createWorldNewsParamsString,
+  createGNewsParamsString,
   createTheNewsParamsString,
 };

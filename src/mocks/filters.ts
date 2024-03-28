@@ -4,13 +4,15 @@ const categories: IDropdownItem[] = [
   {title: 'Sports', value: 'sports'},
   {title: 'Health', value: 'health'},
   {title: 'Travel', value: 'travel'},
+  {title: 'Science', value: 'science'},
   {title: 'Politics', value: 'politics'},
   {title: 'Business', value: 'business'},
 ];
 
 const sources: IDropdownItem[] = [
   {title: 'The New York Times', value: 'The New York Times'},
-  {title: 'BBC', value: 'https://www.bbc.co.uk'},
+  {title: 'ABC News', value: 'abcnews.go.com-1'},
+  {title: 'USA Today', value: 'usatoday.com-2'},
   {title: 'The Atlantic', value: 'theatlantic.com-1'},
 ];
 
