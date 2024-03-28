@@ -30,9 +30,6 @@ const createWorldNewsParamsString = (params: Record<string, any>) => {
 
   if (params.source) result += `&news-sources=${params.source}`;
 
-  // if (params.dateSort)
-  //   result += `&sort=publish-time&sort-direction=${params.dateSort}`;    // response from api with this parameter is too long :(
-
   return result;
 };
 

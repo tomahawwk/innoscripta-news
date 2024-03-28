@@ -18,17 +18,12 @@ for (let i = 1; i <= 15; i++) {
 
 function App() {
   const {articles, isLoading} = useAppSelector(state => state.newsReducer);
-  const [articleItems, setArticleItems] = useState<IArticle>();
   const {params} = useAppSelector(getFiltersSelector);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(fetchNews(params));
   }, []);
-
-  // useEffect(() => {
-  //   articles && setArticleItems(articles);
-  // }, [articles]);
 
   return (
     <div className="App overflow-x-hidden">
