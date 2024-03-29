@@ -33,24 +33,24 @@ function App() {
           </h1>
           <div className="grid items-start gap-lg md:gap-xl">
             <Filters />
-            {isLoading ? (
-              <div className="animation-fade-y animation-delay-6">
+            <div className="animation-fade-y animation-delay-6">
+              {isLoading ? (
                 <List>{skeletonArticles}</List>
-              </div>
-            ) : mergeArticles(articles).length ? (
-              <List>
-                {mergeArticles(articles).map(article => (
-                  <div key={article.link}>
-                    <Card {...article} />
-                  </div>
-                ))}
-              </List>
-            ) : (
-              <p>
-                No articles were found for these filters. Select other filters
-                or click "clear filters"
-              </p>
-            )}
+              ) : mergeArticles(articles).length ? (
+                <List>
+                  {mergeArticles(articles).map(article => (
+                    <div key={article.link}>
+                      <Card {...article} />
+                    </div>
+                  ))}
+                </List>
+              ) : (
+                <p>
+                  No articles were found for these filters. Select other filters
+                  or click "clear filters"
+                </p>
+              )}
+            </div>
           </div>
         </div>
       </BaseLayout>
